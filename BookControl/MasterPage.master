@@ -1,0 +1,181 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+          body{ width:100%; margin:0px; padding:0px;}
+        .container{ 
+            width:84%; 
+            margin-left:7%; margin-right:7%; margin-top:0px; padding:0px; 
+            border:1px solid #333;
+            height:880px;
+            
+            background-image:url(images/1.png);
+        }
+
+        .footer{ text-align:center; font-size:12px;}
+        .footer p{ margin-top:10px;}
+        
+        .title{ font-size:80px; font-weight:bold; text-align:center; font-family:@楷体;}
+        .welcome{ font-size:40px; text-align:center; font-weight:bolder; margin-top:40px;}
+        .in_right{ float:right;
+                    line-height:40px; font-size:20px; text-align:right; 
+                    height:40px; margin-top:10px;
+                   margin-right:5%;
+        }
+        .in_right li{
+            float:left;
+            list-style:none;
+            margin:0px 13px;
+        }
+            .in_right a{
+                color:#333; text-decoration:none;
+            }
+                .in_right a:hover {
+                    color:#ffd800;
+                    text-decoration:underline;
+                   
+                }
+
+        .back {
+             width:90%; margin-left:5%; margin-right:5%; text-align:right; 
+             margin-top:20px;
+        }
+           
+        .back_text {
+            color:#333;
+            text-decoration:none;
+        }
+            .back_text:hover {
+                color:#ffd800;
+                text-decoration:underline;
+            }
+
+        .side {
+            list-style:none;
+        }
+        .side_frame { 
+            height:30px;
+            line-height:30px;  
+            font-size:15px;
+            text-align:left;
+            margin:15px 0px;
+            color:black;
+        }
+        .content_body {
+           
+            font-weight:bold;
+            font-size:14px;
+        }
+        .content_body div {
+          
+            margin:0px;
+            text-align:center;
+            border:1px solid #999;
+            
+            
+        }
+        .content_body table {
+            margin-left:auto;
+            margin-right:auto;
+            font-size:18px;
+            font-weight:bold;
+            border:1px solid #808080;
+        }
+            .content_body table tr {
+                padding:20px 0px;
+            }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+        <div style="width:100%;height:270px;margin:0px;">
+           <div class="title">图书租赁管理系统</div>
+            <div class="welcome">欢迎进入管理员界面</div>
+            <div class="back">
+                <asp:HyperLink ID="hy" runat="server" Text="返回主页面" NavigateUrl="~/Main.aspx" CssClass="back_text"></asp:HyperLink>
+            </div>
+            <div class="in_right">
+                <span>管理员姓名：</span><asp:Label ID="adminName" runat="server"></asp:Label>&nbsp;&nbsp;&nbsp;
+                您已经登录<asp:Label ID="la" runat="server"></asp:Label>次&nbsp;&nbsp;
+                最近登录时间：<asp:Label ID="lab" runat="server"></asp:Label>
+            </div>
+       </div>
+        <div style="width:100%;height:600px; background-image:url(images/200562164728256.jpg); padding-top:10px;">
+            <div style="width:20%;height:100%;float:left;">
+                <ul class="side">
+                <li>
+                    <asp:Menu ID="BookManage" runat="server" OnMenuItemClick="BookManegeMenu" CssClass="side_frame">
+                        <Items>
+                            <asp:MenuItem Text="图书管理" Value="books" >
+                                <asp:MenuItem Text="图书类别管理" Value="BookClass"></asp:MenuItem>
+                                <asp:MenuItem Text="增加图书信息" Value="AddBook"></asp:MenuItem>
+                                <asp:MenuItem Text="查看图书信息" Value="SearchBook"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </li>
+                <li>
+                    <asp:Menu ID="Person" runat="server" OnMenuItemClick="PersonManegeMenu"  CssClass="side_frame">
+                        <Items>
+                            <asp:MenuItem Text="会员管理" Value="persons">
+                                <asp:MenuItem Text="增加会员信息" Value="AddPerson"></asp:MenuItem>
+                                <asp:MenuItem Text="查询会员信息" Value="SearchPerson"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </li>
+                <li>
+                    <asp:Menu ID="Business" runat="server" OnMenuItemClick="BusinessManegeMenu"  CssClass="side_frame">
+                        <Items>
+                            <asp:MenuItem Text="业务管理" Value="Busi">
+                                <asp:MenuItem Text="会员图书出租" Value="YLend"></asp:MenuItem>
+                                <asp:MenuItem Text="会员图书归还" Value="YGet"></asp:MenuItem>
+                                <asp:MenuItem Text="非会员图书出租" Value="NLend"></asp:MenuItem>
+                                <asp:MenuItem Text="非会员图书归还" Value="NGet"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </li>
+                 <li>
+                    <asp:Menu ID="Report" runat="server" OnMenuItemClick="ReportManegeMenu"  CssClass="side_frame">
+                        <Items>
+                            <asp:MenuItem Text="报表统计" Value="Repor">
+                                <asp:MenuItem Text="利润统计报表" Value="Profit"></asp:MenuItem>
+                                <asp:MenuItem Text="租赁情况统计" Value="LendRepor"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </li>
+                    <li>
+                    <asp:Menu ID="NoGetBook" runat="server" OnMenuItemClick="NoBookMenu"  CssClass="side_frame">
+                        <Items>
+                            <asp:MenuItem Text="未还书统计报表" Value="NGetB">
+                                <asp:MenuItem Text="会员类未还情况" Value="YN"></asp:MenuItem>
+                                <asp:MenuItem Text="非会员未还情况" Value="NN"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </li>
+                </ul>
+            </div>
+            <div style="width:80%;height:100%;float:left" class="content_body">
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+            <hr />
+        <div style="width:100%;height:100px"  class="footer">
+            <p>图书租赁系统版权归本人所有</p>
+            <p>使用IE浏览器使用本系统效果更佳</p>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
+
+
