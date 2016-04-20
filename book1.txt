@@ -1,0 +1,314 @@
+USE [master]
+GO
+/****** Object:  Database [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF]    Script Date: 2016/4/15 11:07:49 ******/
+CREATE DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'BookDatabase', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\BookDatabase.mdf' , SIZE = 3136KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'BookDatabase_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\BookDatabase_log.ldf' , SIZE = 784KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET COMPATIBILITY_LEVEL = 110
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET AUTO_CREATE_STATISTICS ON 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET AUTO_SHRINK ON 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET  MULTI_USER 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+USE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF]
+GO
+/****** Object:  Table [dbo].[Admin]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Admin](
+	[ID] [int] NOT NULL,
+	[Name] [nchar](50) NOT NULL,
+	[Password] [nchar](32) NOT NULL,
+	[loginNum] [int] NOT NULL,
+	[lastLogin] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Book]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Book](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[vname] [nchar](50) NOT NULL,
+	[ClassID] [int] NOT NULL,
+	[BNum] [int] NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[Pbulish] [nchar](50) NOT NULL,
+	[Bprice] [float] NOT NULL,
+	[Rprice] [float] NOT NULL,
+	[Adddate] [nchar](20) NOT NULL,
+	[RNum] [int] NOT NULL,
+	[LeftNum] [int] NOT NULL,
+	[CountBorrow] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Class]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Class](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Classname] [nchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Member]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Member](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[username] [nchar](50) NOT NULL,
+	[CardNum] [nchar](50) NOT NULL,
+	[tel] [nchar](50) NOT NULL,
+	[Address] [nchar](50) NOT NULL,
+	[Rnum] [int] NOT NULL,
+	[Btotal] [int] NOT NULL,
+	[Money] [float] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Profit]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Profit](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[Renttime] [nchar](20) NOT NULL,
+	[Price] [float] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[RentA]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RentA](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[CardNum] [nchar](50) NOT NULL,
+	[Renttime] [nchar](20) NOT NULL,
+	[Backtime] [nchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[RentB]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RentB](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[RentName] [nchar](50) NOT NULL,
+	[Idcard] [nchar](18) NOT NULL,
+	[Phone] [nchar](30) NOT NULL,
+	[Renttime] [nchar](20) NOT NULL,
+	[Backtime] [nchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Table]    Script Date: 2016/4/15 11:07:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Table](
+	[ID] [int] NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[Renttime] [datetime] NOT NULL,
+	[Backtime] [datetime] NOT NULL,
+	[Price] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+INSERT [dbo].[Admin] ([ID], [Name], [Password], [loginNum], [lastLogin]) VALUES (1, N'klaus                                             ', N'553355                          ', 194, CAST(0x0000A38D01070DCC AS DateTime))
+SET IDENTITY_INSERT [dbo].[Book] ON 
+
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (27, N'C++程序设计                                           ', 8, 6, N'0001                                              ', N'清华大学出版社                                           ', 50, 2.5, N'20140529            ', 0, 6, 19)
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (28, N'SOA服务计算                                           ', 8, 3, N'0002                                              ', N'理工大数出版社                                           ', 32, 2, N'20140529            ', 1, 2, 4)
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (29, N'军事警备                                              ', 13, 2, N'0003                                              ', N'海事大学出版社                                           ', 78, 3, N'20140529            ', 1, 1, 1)
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (30, N'英语六级必备                                            ', 12, 3, N'0004                                              ', N'星火出版社                                             ', 24, 2.5, N'20140529            ', 1, 2, 1)
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (31, N'恋空                                                ', 9, 1, N'0005                                              ', N'航空出版社                                             ', 120, 10, N'20140529            ', 1, 0, 1)
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (32, N'航海指南                                              ', 11, 2, N'0006                                              ', N'清华大学出版社                                           ', 109, 3.5, N'20140529            ', 0, 2, 0)
+INSERT [dbo].[Book] ([ID], [vname], [ClassID], [BNum], [ISBN], [Pbulish], [Bprice], [Rprice], [Adddate], [RNum], [LeftNum], [CountBorrow]) VALUES (33, N'软件工程                                              ', 8, 6, N'0103                                              ', N'大连理工大学出出版社                                        ', 34, 5, N'20151201            ', 0, 6, 0)
+SET IDENTITY_INSERT [dbo].[Book] OFF
+SET IDENTITY_INSERT [dbo].[Class] ON 
+
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (8, N'计算机类                                              ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (9, N'天文类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (10, N'美术类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (11, N'地理类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (12, N'英语类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (13, N'军事类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (14, N'数学类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (24, N'日语类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (25, N'                                                  ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (26, N'小说类                                               ')
+INSERT [dbo].[Class] ([ID], [Classname]) VALUES (27, N'IT类                                               ')
+SET IDENTITY_INSERT [dbo].[Class] OFF
+SET IDENTITY_INSERT [dbo].[Member] ON 
+
+INSERT [dbo].[Member] ([ID], [username], [CardNum], [tel], [Address], [Rnum], [Btotal], [Money]) VALUES (10, N'张一明                                               ', N'201192239                                         ', N'13898624331                                       ', N'软件学院                                              ', 0, 9, 180.2)
+INSERT [dbo].[Member] ([ID], [username], [CardNum], [tel], [Address], [Rnum], [Btotal], [Money]) VALUES (11, N'李四                                                ', N'20111234                                          ', N'18640802407                                       ', N'城市学院                                              ', 0, 0, 20)
+INSERT [dbo].[Member] ([ID], [username], [CardNum], [tel], [Address], [Rnum], [Btotal], [Money]) VALUES (14, N'李娜                                                ', N'201023119                                         ', N'13354280331                                       ', N'大连开发区                                             ', 0, 1, 198.2)
+SET IDENTITY_INSERT [dbo].[Member] OFF
+SET IDENTITY_INSERT [dbo].[Profit] ON 
+
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (29, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (30, N'0002                                              ', N'20140529            ', 1.8)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (31, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (32, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (33, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (34, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (35, N'0001                                              ', N'20140529            ', 2.5)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (36, N'0001                                              ', N'20140529            ', 2.5)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (37, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (38, N'0001                                              ', N'20140529            ', 2.5)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (39, N'0001                                              ', N'20140529            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (40, N'0001                                              ', N'20140529            ', 2.5)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (41, N'0003                                              ', N'20140529            ', 2.7)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (42, N'0002                                              ', N'20140530            ', 2)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (43, N'0001                                              ', N'20140530            ', 2.25)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (44, N'0002                                              ', N'20140530            ', 1.8)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (45, N'0001                                              ', N'20140530            ', 2.5)
+INSERT [dbo].[Profit] ([ID], [ISBN], [Renttime], [Price]) VALUES (46, N'0004                                              ', N'20140530            ', 2.5)
+SET IDENTITY_INSERT [dbo].[Profit] OFF
+SET IDENTITY_INSERT [dbo].[RentA] ON 
+
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (21, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (22, N'0002                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (23, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (24, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (25, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (26, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (27, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (28, N'0001                                              ', N'201192239                                         ', N'20140529            ', N'20140530            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (29, N'0003                                              ', N'                                                  ', N'20140529            ', NULL)
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (30, N'0001                                              ', N'201192239                                         ', N'20140530            ', N'20140530            ')
+INSERT [dbo].[RentA] ([ID], [ISBN], [CardNum], [Renttime], [Backtime]) VALUES (31, N'0002                                              ', N'201023119                                         ', N'20140530            ', N'20140530            ')
+SET IDENTITY_INSERT [dbo].[RentA] OFF
+SET IDENTITY_INSERT [dbo].[RentB] ON 
+
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (6, N'0001                                              ', N'田晓阳                                               ', N'201192580         ', N'13224223791                   ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (7, N'0001                                              ', N'田晓阳                                               ', N'201192580         ', N'13224223791                   ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (8, N'0001                                              ', N'田晓阳                                               ', N'201192580         ', N'13224223791                   ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (9, N'0001                                              ', N'田晓阳                                               ', N'201192580         ', N'13224223791                   ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (10, N'0001                                              ', N'Stefan                                            ', N'201192580         ', N'13224223791                   ', N'20140529            ', N'20140529            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (11, N'0001                                              ', N'Stefan                                            ', N'201192580         ', N'13224223791                   ', N'20140529            ', N'20140530            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (12, N'0002                                              ', N'                                                  ', N'                  ', N'                              ', N'20140530            ', NULL)
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (13, N'0005                                              ', N'李楠                                                ', N'201023144         ', N'18940847915                   ', N'20140530            ', NULL)
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (14, N'0001                                              ', N'Stefan                                            ', N'12345678          ', N'13224223791                   ', N'20140530            ', N'20140530            ')
+INSERT [dbo].[RentB] ([ID], [ISBN], [RentName], [Idcard], [Phone], [Renttime], [Backtime]) VALUES (15, N'0004                                              ', N'UYG                                               ', N'YFTY              ', N'YTFYF                         ', N'20140530            ', NULL)
+SET IDENTITY_INSERT [dbo].[RentB] OFF
+ALTER TABLE [dbo].[Table] ADD  DEFAULT ((3)) FOR [Price]
+GO
+USE [master]
+GO
+ALTER DATABASE [E:\VS2010\BOOKCONTROL\APP_DATA\BOOKDATABASE.MDF] SET  READ_WRITE 
+GO

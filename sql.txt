@@ -1,0 +1,77 @@
+
+CREATE TABLE Admin(
+	[ID] [int] NOT NULL,
+	[Name] [nchar](50) NOT NULL,
+	[Password] [nchar](32) NOT NULL,
+	[loginNum] [int] NOT NULL,
+	[lastLogin] [datetime] NOT NULL
+);
+
+
+CREATE TABLE Book(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[vname] [nchar](50) NOT NULL,
+	[ClassID] [int] NOT NULL,
+	[BNum] [int] NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[Pbulish] [nchar](50) NOT NULL,
+	[Bprice] [float] NOT NULL,
+	[Rprice] [float] NOT NULL,
+	[Adddate] [nchar](20) NOT NULL,
+	[RNum] [int] NOT NULL,
+	[LeftNum] [int] NOT NULL,
+	[CountBorrow] [int] NOT NULL
+) ;
+
+CREATE TABLE Class(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Classname] [nchar](50) NOT NULL
+) ;
+
+
+CREATE TABLE Member(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[username] [nchar](50) NOT NULL,
+	[CardNum] [nchar](50) NOT NULL,
+	[tel] [nchar](50) NOT NULL,
+	[Address] [nchar](50) NOT NULL,
+	[Rnum] [int] NOT NULL,
+	[Btotal] [int] NOT NULL,
+	[Money] [float] NOT NULL
+) ;
+
+CREATE TABLE Profit(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[Renttime] [nchar](20) NOT NULL,
+	[Price] [float] NOT NULL
+);
+
+CREATE TABLE RentA(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[CardNum] [nchar](50) NOT NULL,
+	[Renttime] [nchar](20) NOT NULL,
+	[Backtime] [nchar](20) NULL
+) ;
+
+
+CREATE TABLE RentB(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[RentName] [nchar](50) NOT NULL,
+	[Idcard] [nchar](18) NOT NULL,
+	[Phone] [nchar](30) NOT NULL,
+	[Renttime] [nchar](20) NOT NULL,
+	[Backtime] [nchar](20) NULL
+) ;
+
+CREATE TABLE Table(
+	[ID] [int] NOT NULL,
+	[ISBN] [nchar](50) NOT NULL,
+	[Renttime] [datetime] NOT NULL,
+	[Backtime] [datetime] NOT NULL,
+	[Price] [int] NOT NULL
+) ;
+
+INSERT Admin([ID], [Name], [Password], [loginNum], [lastLogin]) VALUES (1, N'userinfo', N'123456',1, CAST(0x0000A38D01070DCC AS DateTime));
